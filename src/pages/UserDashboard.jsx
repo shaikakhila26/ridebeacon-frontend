@@ -183,6 +183,8 @@ useEffect(() => {
   };
 }, [activeRide, profile, addToast]);
 
+console.log("Requesting geocode for pickup:", pickup);
+console.log("Requesting geocode for dropoff:", dropoff);
 
   // geocode util (unchanged)
 async function geocodeAddress(address) {
@@ -215,7 +217,7 @@ async function geocodeAddress(address) {
 async function handleSearch() {
   console.log("handleSearch clicked", { pickup, dropoff });
 
-  if (!pickup || !dropoff) {
+  if (!pickup.trim() || !dropoff.trim()) {
     addToast("Enter both pickup and dropoff");
     return;
   }
