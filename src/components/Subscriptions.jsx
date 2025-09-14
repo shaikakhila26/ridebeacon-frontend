@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 export default function Subscriptions() {
   const items = [
     { title: "Within the City", desc: "We run services within the city to any destination you want.", color: "bg-yellow-400" },
@@ -20,3 +23,5 @@ export default function Subscriptions() {
     </section>
   );
 }
+
+

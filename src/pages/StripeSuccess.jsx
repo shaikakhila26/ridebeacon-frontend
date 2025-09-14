@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabaseClient";
 import { useToasts } from "../components/Toasts";
+import React from 'react';
 
 export default function StripeSuccess() {
   const navigate = useNavigate();

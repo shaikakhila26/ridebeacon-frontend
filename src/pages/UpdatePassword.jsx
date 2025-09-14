@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useNavigate } from "react-router-dom";
 import { useToasts } from "../components/Toasts";
+import React from 'react';
 
 export default function UpdatePassword() {
   const [password, setPassword] = useState("");
