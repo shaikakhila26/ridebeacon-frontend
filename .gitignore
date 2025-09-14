@@ -43,34 +43,20 @@ Desktop.ini
 coverage/
 *.lcov
 
-# Static/compiled assets (optional, for user uploads or generated files only)
-public/uploads/
-public/*-uploads/
-public/*.tmp
-public/*.log
+
 
 # Test results and snapshots
 *.out
 *.pid
 *.bak
 
-# Optional: exclude image assets generated at runtime
-*.png
-*.jpg
-*.jpeg
-*.webp
-*.gif
-*.pdf
+
 
 # Exclude exports or backups
 *.sql
 *.dump
 
-# Ignore other config/cache files
-.eslintcache
-postcss.config.js
-tailwind.config.js
-vite.config.js
+
 
 # Ignore custom cache/artifacts
 npm-cache/
