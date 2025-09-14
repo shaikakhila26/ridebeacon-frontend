@@ -15,7 +15,7 @@ const accountTabs = [
   { label: "Home" },
   { label: "Personal info" },
   { label: "Security" },
-  { label: "Privacy & data" },
+  
   {label : "Activity"},
   
 ];
@@ -552,15 +552,9 @@ if (!userLocation) return <div>Loading your location...</div>;
         <div className="flex items-center gap-6">
           <div className="flex gap-4">
             <button className="border-b-2 border-black pb-1 font-semibold">Trip</button>
-            <button className="text-gray-500 hover:text-black">Rentals</button>
+            
           </div>
-          <button className="relative flex items-center gap-1 px-3 py-1 border rounded-md hover:bg-gray-100 text-sm">
-            <span className="hidden md:inline">Activity</span>
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-              <circle cx={12} cy={12} r={10} stroke="currentColor" />
-              <path d="M12 8l3 3-3 3" strokeLinecap="round" />
-            </svg>
-          </button>
+          
           <div className="relative">
             <button onClick={() => setProfileOpen(p => !p)} className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center border hover:ring-2 hover:ring-yellow-400" aria-label="User menu" type="button">
               {profile?.profile_pic ? (
@@ -589,36 +583,13 @@ if (!userLocation) return <div>Loading your location...</div>;
                     </div>
                     <span className="text-lg font-bold capitalize">{profile?.full_name || "Unnamed User"}</span>
                   </div>
-                  <div className="flex justify-between mb-3">
-                    <button className="flex flex-col items-center gap-1 text-gray-700 hover:text-black text-xs">
-                      <svg className="h-6 w-6 mb-1" fill="none" stroke="currentColor"><circle cx={12} cy={12} r={10} /><path d="M15 12a3 3 0 01-6 0" /></svg>
-                      Help
-                    </button>
-                    <button className="flex flex-col items-center gap-1 text-gray-700 hover:text-black text-xs">
-                      <svg className="h-6 w-6 mb-1" fill="none" stroke="currentColor"><rect x={4} y={8} width={16} height={10} rx={2} /><path d="M8 12h8" /></svg>
-                      Wallet
-                    </button>
-                    <button className="flex flex-col items-center gap-1 text-gray-700 hover:text-black text-xs">
-                      <svg className="h-6 w-6 mb-1" fill="none" stroke="currentColor"><rect x={4} y={4} width={16} height={16} rx={3} /><path d="M8 9h8M8 13" /></svg>
-                      Activity
-                    </button>
-                  </div>
-                  <div className="bg-gray-50 rounded-md p-3 mb-3">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <div className="text-xs text-gray-500">Ride Beacon Cash</div>
-                        <div className="text-lg font-bold">₹0.00</div>
-                      </div>
-                    </div>
-                  </div>
+                  
+                  
                   <button className="flex items-center w-full py-2 text-sm text-gray-700 hover:bg-gray-100 rounded transition mb-2" onClick={() => { setManageOpen(true); setProfileOpen(false); setActiveTab("Home"); }}>
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor"><circle cx={12} cy={12} r={10} /><path d="M8 11h8M8 15h8" /></svg>
                     Manage account
                   </button>
-                  <button className="flex items-center w-full py-2 text-sm text-gray-700 hover:bg-gray-100 rounded transition">
-                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor"><rect x={7} y={7} width={10} height={10} rx={2} /><path d="M9 9l6 6M15 9l-6 6" /></svg>
-                    Promotions
-                  </button>
+                  
                   <button
   onClick={async () => {
     await supabase.auth.signOut();
@@ -676,7 +647,7 @@ if (!userLocation) return <div>Loading your location...</div>;
                     <p className="text-gray-600">{email}</p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                    {["Personal info", "Security", "Privacy & data"].map(label => (
+                    {["Personal info", "Security"].map(label => (
                       <button key={label} onClick={() => setActiveTab(label)} className="bg-gray-100 hover:bg-gray-200 rounded p-6 text-center font-semibold cursor-pointer">
                         {label === "Personal info" && (
                           <svg className="mx-auto mb-2 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -690,11 +661,7 @@ if (!userLocation) return <div>Loading your location...</div>;
                             <path d="M12 8v4l3 3" />
                           </svg>
                         )}
-                        {label === "Privacy & data" && (
-                          <svg className="mx-auto mb-2 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                            <rect x={8} y={8} width={8} height={8} rx={2} />
-                          </svg>
-                        )}
+                        
                         {label}
                       </button>
                     ))}
