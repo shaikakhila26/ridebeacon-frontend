@@ -382,8 +382,9 @@ async function cancelRide() {
   try {
     const { data: { session } } = await supabase.auth.getSession();
      const token = session?.access_token;
-    await axios.patch(`${import.meta.env.VITE_API_URL}/api/rides/${activeRide.id}/cancel`,{
-        headers: { Authorization: `Bearer ${token}` }
+    await axios.patch(`${import.meta.env.VITE_API_URL}/api/rides/${activeRide.id}/cancel`,
+      {},
+        {headers: { Authorization: `Bearer ${token}` }
     });
     addToast("Ride cancelled", { type: "success" });
     setActiveRide(null);
