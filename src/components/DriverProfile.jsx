@@ -288,12 +288,7 @@ const handleFileUpload = async (event) => {
           </>
         )}
 
-        <button
-  onClick={() => navigate("/driver/trips")}
-  className="bg-gray-200 px-4 py-2 rounded font-bold hover:bg-yellow-400"
->
-  Trips
-</button>
+        
 
 
         {/* Action Buttons */}
@@ -321,9 +316,14 @@ const handleFileUpload = async (event) => {
             >
               Edit Profile
             </button>
-            <button className="w-full bg-gray-200 py-3 rounded-xl font-bold">
-              Support
-            </button>
+
+            <button
+  onClick={() => navigate("/driver/trips")}
+  className="bg-gray-200 px-4 py-2 rounded font-bold hover:bg-yellow-400"
+>
+  Trips
+</button>
+           
             <button
   onClick={async () => {
     await supabase.auth.signOut();
