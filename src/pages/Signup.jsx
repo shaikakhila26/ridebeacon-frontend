@@ -69,7 +69,7 @@ const userId = data.user.id;
   const handleGoogleSignup = async () => {
     const {data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "http://localhost:5173/auth/callback" },
+      options: { redirectTo: "https://ridebeacon-frontend.vercel.app//auth/callback" },
     });
     if (error) {
         addToast(error.message, { type: 'error' });

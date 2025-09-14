@@ -56,7 +56,7 @@ export default function Login() {
   const handleGoogleLogin = async () => {
     const { data,error } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: "http://localhost:5173/auth/callback" },
+      options: { redirectTo: "https://ridebeacon-frontend.vercel.app/auth/callback" },
     });
     if (error){
        addToast(error.message, { type: 'error' });
@@ -103,7 +103,7 @@ export default function Login() {
   }
   setLoading(true);
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: `http://localhost:5173/update-password`, // your password reset page route
+    redirectTo: "https://ridebeacon-frontend.vercel.app//update-password", // your password reset page route
   });
   if (error) {
     addToast(error.message, { type: 'error' });
