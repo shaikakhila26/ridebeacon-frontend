@@ -16,7 +16,7 @@ export default function Subscriptions() {
           <div key={i} className={`p-6 rounded-xl shadow ${item.color}`}>
             <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
             <p className="text-sm mb-4">{item.desc}</p>
-            <button className="px-4 py-2 bg-black text-white rounded">Read More</button>
+            
           </div>
         ))}
       </div>

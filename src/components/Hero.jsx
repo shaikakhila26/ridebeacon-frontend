@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 
 export default function Hero() {
@@ -11,7 +13,9 @@ export default function Hero() {
   <div className="md:w-1/2 space-y-6 z-10 text-black">
     <h1 className="text-5xl font-bold leading-tight">Need a Ride</h1>
     <div className="flex gap-4">
+     <Link to="/signup">
       <button className="bg-black text-yellow-400 px-6 py-3 rounded-full font-semibold">Book Now</button>
+      </Link>
     </div>
   </div>
 </section>
