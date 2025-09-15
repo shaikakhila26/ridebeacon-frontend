@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 // You can update the className below with your actual background/theme classes.
 export default function About() {
