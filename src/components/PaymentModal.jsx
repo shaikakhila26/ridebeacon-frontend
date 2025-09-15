@@ -79,7 +79,7 @@ export default function PaymentModal({ amount, rideId, riderId, onClose, onPayme
         const token = session?.access_token;
         if (!token) throw new Error("Authentication token not found.");
         
-        const response = await fetch(`${API_BASE_URL}/api/create-payment-intent`, {
+        const response = await fetch(`${API_BASE_URL}/api/payments/intent`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
