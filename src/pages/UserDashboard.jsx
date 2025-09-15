@@ -413,7 +413,7 @@ useEffect(() => {
     setLoadingHistory(true);
 
     try {
-        const { data: { session } = await supabase.auth.getSession();
+        const { data: { session } } = await supabase.auth.getSession();
         const token = session?.access_token;
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/rides/history`, {
         params: { userId: user.id,role:'rider' },
