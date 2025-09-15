@@ -1023,7 +1023,7 @@ type="button"
           {activeRide.status === "pending" && "Waiting for drivers..."}
           {activeRide.status === "confirmed" && "Driver assigned. On the way!"}
           {activeRide.status === "ongoing" && "Enjoy your ride!"}
-          {activeRide.status === "completed" && "Ride complete."}
+          {activeRide.status === "completed" && "Ride complete"}
           {activeRide?.status === "completed" && activeRide.payment_status !== "completed" && (
   <button
     className="mt-4 py-2 px-6 rounded bg-yellow-500 hover:bg-yellow-600 font-semibold"

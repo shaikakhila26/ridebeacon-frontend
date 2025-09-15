@@ -44,26 +44,33 @@ export default function RateDriverModal({ ride, riderId, onClose, onRated }) {
   review,
 });
 
-      if (onRated) onRated(rating);
-      onClose();
+      onRated(rating);
     } catch (err) {
-        console.error("submit rating error:",err.response?.data || err.message);
-      alert("Failed to submit rating." + (err.response?.data?.error || err.message));
+      console.error("Failed to submit rating:", err.response?.data?.error || err.message);
+      alert("Failed to submit rating: " + (err.response?.data?.error || err.message));
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-8 shadow max-w-sm w-full">
-        <h3 className="font-semibold mb-4 text-xl">Rate your Driver</h3>
-        <div className="mb-3 flex">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full flex flex-col items-center text-center">
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-3xl font-light"
+          aria-label="Close modal"
+        >&times;</button>
+        
+        <h3 className="font-semibold text-2xl mb-2 text-gray-800">Rate Your Ride</h3>
+        <p className="text-gray-600 mb-4">How was your experience with {ride?.driver?.full_name || 'your driver'}?</p>
+
+        <div className="mb-6 flex space-x-2">
           {[1,2,3,4,5].map(star => (
             <button
               key={star}
               type="button"
-              className={`text-3xl ${star <= rating ? "text-yellow-400" : "text-gray-300"}`}
+              className={`text-4xl transition-colors ${star <= rating ? "text-yellow-400" : "text-gray-300"} hover:scale-110 transform`}
               onClick={() => setRating(star)}
               disabled={loading}
             >★</button>
@@ -73,23 +80,25 @@ export default function RateDriverModal({ ride, riderId, onClose, onRated }) {
           value={review}
           onChange={e => setReview(e.target.value)}
           rows={3}
-          className="w-full p-2 border rounded mb-4"
-          placeholder="Share your experience "
+          className="w-full p-3 border border-gray-300 rounded-lg mb-4 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-500"
+          placeholder="Share your experience (optional)"
           disabled={loading}
         />
-        <div className="flex gap-3">
+        <div className="w-full flex flex-col sm:flex-row gap-3">
           <button
-            className="bg-yellow-500 text-white rounded px-4 py-2 font-bold"
+            className="w-full bg-yellow-500 text-white rounded-lg px-4 py-3 font-bold hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={loading || rating === 0}
             onClick={submitRating}
           >
-            {loading ? "Submitting..." : "Submit"}
+            {loading ? "Submitting..." : "Submit Rating"}
           </button>
           <button
-            className="border rounded px-4 py-2"
+            className="w-full text-gray-600 font-bold px-4 py-3 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
             onClick={onClose}
             disabled={loading}
-          >Cancel</button>
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>
