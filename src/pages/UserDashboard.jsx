@@ -413,7 +413,7 @@ useEffect(() => {
     setLoadingHistory(true);
 
     try {
-        const { data: { session } } = await supabase.auth.getSession();
+        const { data: { session } = await supabase.auth.getSession();
         const token = session?.access_token;
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/rides/history`, {
         params: { userId: user.id,role:'rider' },
@@ -547,20 +547,20 @@ if (!userLocation) return <div>Loading your location...</div>;
   return (
     <>
     <div className="min-h-screen flex flex-col bg-[#fafbfc]">
-      <nav className="flex justify-between items-center px-6 py-4 bg-white shadow-sm border-b">
-        <div className="text-2xl font-bold">Ride Beacon</div>
-        <div className="flex items-center gap-6">
-          <div className="flex gap-4">
+      <nav className="flex justify-between items-center px-4 py-3 md:px-6 md:py-4 bg-white shadow-sm border-b">
+        <div className="text-xl md:text-2xl font-bold">Ride Beacon</div>
+        <div className="flex items-center gap-4 md:gap-6">
+          <div className="hidden md:flex gap-4">
             <button className="border-b-2 border-black pb-1 font-semibold">Trip</button>
             
           </div>
           
           <div className="relative">
-            <button onClick={() => setProfileOpen(p => !p)} className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center border hover:ring-2 hover:ring-yellow-400" aria-label="User menu" type="button">
+            <button onClick={() => setProfileOpen(p => !p)} className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-200 flex items-center justify-center border hover:ring-2 hover:ring-yellow-400" aria-label="User menu" type="button">
               {profile?.profile_pic ? (
-                <img src={profile.profile_pic} alt="avatar" className="w-10 h-10 rounded-full object-cover" />
+                <img src={profile.profile_pic} alt="avatar" className="w-full h-full rounded-full object-cover" />
               ) : (
-                <svg className="h-8 w-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="h-6 w-6 md:h-8 md:w-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <circle cx={12} cy={8} r={4} />
                   <path d="M16 21v-2a4 4 0 00-8 0v2" />
                 </svg>
@@ -569,19 +569,19 @@ if (!userLocation) return <div>Loading your location...</div>;
             {profileOpen && (
               <>
                 <div className="fixed inset-0 z-10" onClick={() => setProfileOpen(false)} aria-hidden="true" />
-                <div className="absolute right-0 mt-3 w-72 bg-white rounded-xl shadow-lg p-4 z-20 border">
+                <div className="absolute right-0 mt-2 md:mt-3 w-64 md:w-72 bg-white rounded-xl shadow-lg p-4 z-20 border">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full overflow-hidden bg-gray-200">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden bg-gray-200">
                       {profile?.profile_pic ? (
                         <img src={profile.profile_pic} alt="avatar" className="w-full h-full object-cover" />
                       ) : (
-                        <svg className="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-8 h-8 md:w-10 md:h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <circle cx={12} cy={8} r={4} />
                           <path d="M16 21v-2a4 4 0 00-8 0v2" />
                         </svg>
                       )}
                     </div>
-                    <span className="text-lg font-bold capitalize">{profile?.full_name || "Unnamed User"}</span>
+                    <span className="text-base md:text-lg font-bold capitalize">{profile?.full_name || "Unnamed User"}</span>
                   </div>
                   
                   
@@ -609,19 +609,19 @@ if (!userLocation) return <div>Loading your location...</div>;
 
       {manageOpen && (
         <div className="fixed inset-0 bg-black/30 z-40 flex items-center justify-center p-4 overflow-auto">
-          <div className="bg-white rounded-2xl shadow-xl max-w-4xl w-full flex overflow-hidden relative">
-            <button onClick={() => setManageOpen(false)} aria-label="Close modal" className="absolute top-4 right-4 bg-gray-100 rounded-full p-2 hover:bg-gray-200">
+          <div className="bg-white rounded-2xl shadow-xl max-w-full w-full md:max-w-4xl flex flex-col md:flex-row overflow-hidden relative">
+            <button onClick={() => setManageOpen(false)} aria-label="Close modal" className="absolute top-4 right-4 z-10 bg-gray-100 rounded-full p-2 hover:bg-gray-200">
               <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <nav className="w-44 border-r p-6 flex flex-col">
+            <nav className="w-full md:w-44 border-b md:border-r md:border-b-0 p-4 md:p-6 flex flex-row md:flex-col overflow-x-auto md:overflow-x-hidden">
               {accountTabs.map(tab => (
                 <button key={tab.label}
                   onClick={() => setActiveTab(tab.label)}
-                  className={`text-left mb-2 p-3 rounded hover:bg-gray-100 w-full font-medium ${
-                    activeTab === tab.label ? "bg-yellow-50 border-l-4 border-yellow-600 text-yellow-600" : "text-gray-700"
+                  className={`flex-shrink-0 md:flex-shrink mb-2 md:mb-2 p-2 md:p-3 rounded hover:bg-gray-100 w-auto md:w-full text-sm md:text-base font-medium ${
+                    activeTab === tab.label ? "bg-yellow-50 border-b-2 md:border-l-4 md:border-b-0 border-yellow-600 text-yellow-600" : "text-gray-700"
                   }`}
                 >
                   {tab.label}
@@ -629,11 +629,11 @@ if (!userLocation) return <div>Loading your location...</div>;
               ))}
             </nav>
 
-            <main className="flex-1 p-6 overflow-auto max-h-[85vh]">
+            <main className="flex-1 p-4 md:p-6 overflow-auto max-h-[85vh]">
               {activeTab === "Home" && (
                 <>
                   <div className="flex flex-col items-center mb-5">
-                    <div className="w-24 h-24 bg-gray-200 rounded-full overflow-hidden mb-3">
+                    <div className="w-20 h-20 md:w-24 md:h-24 bg-gray-200 rounded-full overflow-hidden mb-3">
                       {profile?.profile_pic ? (
                         <img alt="avatar" src={profile.profile_pic} className="w-full h-full object-cover" />
                       ) : (
@@ -643,20 +643,20 @@ if (!userLocation) return <div>Loading your location...</div>;
                         </svg>
                       )}
                     </div>
-                    <h2 className="text-2xl font-semibold">{profile?.full_name || "Unnamed User"}</h2>
-                    <p className="text-gray-600">{email}</p>
+                    <h2 className="text-xl md:text-2xl font-semibold">{profile?.full_name || "Unnamed User"}</h2>
+                    <p className="text-gray-600 text-sm md:text-base">{email}</p>
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     {["Personal info", "Security"].map(label => (
-                      <button key={label} onClick={() => setActiveTab(label)} className="bg-gray-100 hover:bg-gray-200 rounded p-6 text-center font-semibold cursor-pointer">
+                      <button key={label} onClick={() => setActiveTab(label)} className="bg-gray-100 hover:bg-gray-200 rounded p-4 md:p-6 text-center font-semibold cursor-pointer text-sm md:text-base">
                         {label === "Personal info" && (
-                          <svg className="mx-auto mb-2 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                          <svg className="mx-auto mb-2 w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                             <path d="M12 14v-4m-3 0a3 3 0 116 0" />
                             <circle cx={12} cy={9} r={4} />
                           </svg>
                         )}
                         {label === "Security" && (
-                          <svg className="mx-auto mb-2 w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                          <svg className="mx-auto mb-2 w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                             <circle cx={12} cy={12} r={10} />
                             <path d="M12 8v4l3 3" />
                           </svg>
@@ -666,13 +666,13 @@ if (!userLocation) return <div>Loading your location...</div>;
                       </button>
                     ))}
                   </div>
-                  <div className="bg-white rounded-xl border p-6 shadow flex items-center justify-between max-w-xl">
-                    <div>
-                      <h3 className="font-semibold text-lg mb-1">Complete your account check-up</h3>
-                      <p className="text-gray-600">Complete your account check-up to make Ride Beacon work better for you and keep you secure.</p>
-                      <button className="mt-3 px-6 py-2 rounded-full bg-gray-100 hover:bg-gray-200">Begin check-up</button>
+                  <div className="bg-white rounded-xl border p-4 md:p-6 shadow flex flex-col md:flex-row items-center justify-between max-w-xl text-center md:text-left">
+                    <div className="mb-4 md:mb-0">
+                      <h3 className="font-semibold text-lg md:text-xl mb-1">Complete your account check-up</h3>
+                      <p className="text-gray-600 text-sm md:text-base">Complete your account check-up to make Ride Beacon work better for you and keep you secure.</p>
+                      <button className="mt-3 px-4 md:px-6 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-sm md:text-base">Begin check-up</button>
                     </div>
-                    <svg className="w-14 h-14 text-blue-500" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg className="w-12 h-12 md:w-14 md:h-14 text-blue-500 flex-shrink-0" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect x={8} y={8} width={24} height={16} rx={3} fill="#3B82F6" />
                       <rect x={10} y={14} width={8} height={4} rx={1} fill="#fff" />
                       <rect x={22} y={14} width={8} height={4} rx={1} fill="#fff" />
@@ -683,10 +683,10 @@ if (!userLocation) return <div>Loading your location...</div>;
 
               {activeTab === "Personal info" && (
                 <>
-                  <h2 className="text-3xl font-semibold mb-6">Personal info</h2>
+                  <h2 className="text-2xl md:text-3xl font-semibold mb-6">Personal info</h2>
                   <div className="max-w-xl mx-auto">
-                    <div className="flex items-center mb-8">
-                      <div className="relative w-28 h-28 rounded-full overflow-hidden bg-gray-200">
+                    <div className="flex flex-col items-center mb-8">
+                      <div className="relative w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-200">
                         {profile?.profile_pic ? (
                           <img alt="avatar" src={profile.profile_pic} className="w-full h-full object-cover" />
                         ) : (
@@ -695,9 +695,9 @@ if (!userLocation) return <div>Loading your location...</div>;
                             <path d="M16 21v-2a6 6 0 00-8 0v2" />
                           </svg>
                         )}
-                        <label className="absolute bottom-2 right-2 cursor-pointer bg-white p-2 rounded border shadow hover:bg-gray-100">
+                        <label className="absolute bottom-1 right-1 md:bottom-2 md:right-2 cursor-pointer bg-white p-1 md:p-2 rounded border shadow hover:bg-gray-100">
                           <input type="file" accept="image/*" className="hidden" onChange={handleAvatarUpload} disabled={saving} />
-                          <svg className="w-5 h-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                         </label>
@@ -705,20 +705,20 @@ if (!userLocation) return <div>Loading your location...</div>;
                     </div>
 
                     <dl className="border rounded-md border-gray-100 divide-y divide-gray-200">
-                      <div className="flex justify-between items-center p-4">
-                        <dt className="font-medium text-gray-900">Name</dt>
+                      <div className="flex flex-col md:flex-row justify-between md:items-center p-4">
+                        <dt className="font-medium text-gray-900 mb-2 md:mb-0">Name</dt>
                         <div className="flex items-center space-x-2">
                           {editingField === "name" ? (
                             <>
                               <input
                                 type="text"
-                                className="border px-2 py-1 rounded"
+                                className="border px-2 py-1 rounded w-full"
                                 value={editName}
                                 onChange={(e) => setEditName(e.target.value)}
                                 disabled={saving}
                               />
-                              <button className="text-green-600" onClick={() => saveField("name")} disabled={saving}>Save</button>
-                              <button className="text-red-600" onClick={() => setEditingField(null)} disabled={saving}>Cancel</button>
+                              <button className="text-green-600 whitespace-nowrap" onClick={() => saveField("name")} disabled={saving}>Save</button>
+                              <button className="text-red-600 whitespace-nowrap" onClick={() => setEditingField(null)} disabled={saving}>Cancel</button>
                             </>
                           ) : (
                             <>
@@ -729,20 +729,20 @@ if (!userLocation) return <div>Loading your location...</div>;
                         </div>
                       </div>
 
-                      <div className="flex justify-between items-center p-4">
-                        <dt className="font-medium text-gray-900">Phone</dt>
+                      <div className="flex flex-col md:flex-row justify-between md:items-center p-4">
+                        <dt className="font-medium text-gray-900 mb-2 md:mb-0">Phone</dt>
                         <div className="flex items-center space-x-2">
                           {editingField === "phone" ? (
                             <>
                               <input
                                 type="text"
-                                className="border px-2 py-1 rounded"
+                                className="border px-2 py-1 rounded w-full"
                                 value={editPhone}
                                 onChange={(e) => setEditPhone(e.target.value)}
                                 disabled={saving}
                               />
-                              <button className="text-green-600" onClick={() => saveField("phone")} disabled={saving}>Save</button>
-                              <button className="text-red-600" onClick={() => setEditingField(null)} disabled={saving}>Cancel</button>
+                              <button className="text-green-600 whitespace-nowrap" onClick={() => saveField("phone")} disabled={saving}>Save</button>
+                              <button className="text-red-600 whitespace-nowrap" onClick={() => setEditingField(null)} disabled={saving}>Cancel</button>
                             </>
                           ) : (
                             <>
@@ -755,8 +755,8 @@ if (!userLocation) return <div>Loading your location...</div>;
                         </div>
                       </div>
 
-                      <div className="flex justify-between items-center p-4">
-                        <dt className="font-medium text-gray-900">Email</dt>
+                      <div className="flex flex-col md:flex-row justify-between md:items-center p-4">
+                        <dt className="font-medium text-gray-900 mb-2 md:mb-0">Email</dt>
                         <dd className="text-gray-700 flex items-center space-x-1">
                           <span>{email}</span>
                           <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
@@ -766,8 +766,8 @@ if (!userLocation) return <div>Loading your location...</div>;
                         <button disabled className="text-yellow-600 cursor-not-allowed">Verified</button>
                       </div>
 
-                      <div className="flex justify-between items-center p-4">
-                        <dt className="font-medium text-gray-900">Language</dt>
+                      <div className="flex flex-col md:flex-row justify-between md:items-center p-4">
+                        <dt className="font-medium text-gray-900 mb-2 md:mb-0">Language</dt>
                         <dd className="text-gray-700">Update device language</dd>
                        <button
   onClick={() => addToast("Language update not implemented", { type: "info" })}
@@ -784,8 +784,8 @@ if (!userLocation) return <div>Loading your location...</div>;
 
               
               {activeTab === "Activity" && (
-  <div className="max-w-xl mx-auto p-4 overflow-auto">
-    <h2 className="text-2xl font-semibold mb-4">Ride History</h2>
+  <div className="max-w-full md:max-w-xl mx-auto p-2 md:p-4 overflow-auto">
+    <h2 className="text-xl md:text-2xl font-semibold mb-4">Ride History</h2>
   
     {loadingHistory ? (
       <p>Loading...</p>
@@ -795,12 +795,12 @@ if (!userLocation) return <div>Loading your location...</div>;
       <ul className="space-y-4">
         {rideHistory.map((ride) => (
           <li key={ride.id} className="p-4 border rounded-md shadow-sm bg-white">
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-2">
               <div>
                 <p className="font-semibold">{ride.pickup} → {ride.dropoff}</p>
-                <p className="text-sm text-gray-500">{new Date(ride.created_at).toLocaleString()}</p>
+                <p className="text-xs md:text-sm text-gray-500">{new Date(ride.created_at).toLocaleString()}</p>
               </div>
-              <div className="text-right">
+              <div className="text-right mt-2 md:mt-0">
                 <p className="font-semibold">₹{ride.fare.toFixed(2)}</p>
                 <p className={`text-sm font-medium ${
                   ride.status === "completed" ? "text-green-600" :
@@ -814,7 +814,7 @@ if (!userLocation) return <div>Loading your location...</div>;
             {/* Show Download Receipt only if completed */}
             {ride.status === "completed" && (
               <button
-                className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                className="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm"
                 onClick={() => downloadReceipt(ride.id)}
               >
                 Download Receipt
@@ -833,7 +833,7 @@ if (!userLocation) return <div>Loading your location...</div>;
       )}
 
       {/* Main content section */}
-      <div className="flex flex-1">
+      <div className="flex flex-col md:flex-row flex-1">
         {/* Left panel */}
         <div className="w-full md:w-1/3 bg-white p-6 md:p-8 border-r">
           <h2 className="text-xl font-bold mb-6">Find a trip</h2>
@@ -947,7 +947,7 @@ type="button"
         
 
 
-        <div className="w-full md:w-2/3 bg-gray-100">
+        <div className="w-full md:w-2/3 bg-gray-100 h-[60vh] md:h-auto">
     <MapView
     key = {mapResetKey}
     userLocation={userLocation}
@@ -963,13 +963,12 @@ type="button"
 {activeRide && (
   <div
     className="
-      fixed bottom-6 left-1/2 transform -translate-x-1/2
-      w-[95vw] max-w-md md:max-w-lg
-      bg-white rounded-2xl
+      fixed bottom-0 left-0 right-0 md:left-1/2 md:transform md:-translate-x-1/2
+      w-full md:w-[95vw] md:max-w-md
+      bg-white rounded-t-2xl md:rounded-2xl
       shadow-2xl shadow-black/20
-      p-6 z-50 flex flex-col items-start gap-3
+      p-4 md:p-6 z-50 flex flex-col items-start gap-3
       transition-transform duration-300 ease-out
-      md:w-1/3
       md:backdrop-blur-none
       backdrop-blur-sm
       md:backdrop-filter-none
@@ -978,7 +977,7 @@ type="button"
       minHeight: 130,
     }}
   >
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 w-full">
       {/* Status icon with animation */}
       <span className="relative w-8 h-8 flex items-center justify-center">
         {activeRide.status === "pending" && (
@@ -1013,7 +1012,7 @@ type="button"
       <div className="flex-1">
         <div
           key={activeRide.status} // trigger re-animation on status change
-          className={`text-xl font-bold ${
+          className={`text-lg md:text-xl font-bold ${
             activeRide.status === "pending"
               ? "text-yellow-700"
               : activeRide.status === "completed"
@@ -1073,15 +1072,15 @@ type="button"
       {(activeRide.status === "confirmed" || activeRide.status === "ongoing") &&
         activeRide.driver && (
           <div
-            className="ml-4 flex items-center gap-3 opacity-0 animate-fadeIn"
+            className="flex items-center gap-3 mt-2 md:mt-0 opacity-0 animate-fadeIn"
             key={activeRide.driver.id} // force re-render & animation on driver change
           >
             <img
               src={activeRide.driver.profile_pic || "https://ui-avatars.com/api/?name=Driver"}
               alt="Driver"
-              className="w-12 h-12 rounded-full border border-gray-300"
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-gray-300"
             />
-            <span className="font-medium">{activeRide.driver.full_name || "Driver"}</span>
+            <span className="font-medium text-sm md:text-base">{activeRide.driver.full_name || "Driver"}</span>
           </div>
         )}
     </div>
