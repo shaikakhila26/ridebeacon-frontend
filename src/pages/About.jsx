@@ -54,7 +54,7 @@ export default function About() {
               <span className="font-semibold text-yellow-600">
                 📈 Driver Earnings Dashboard:
               </span>
-              &nbsp;Detailed earnings, payouts, and review analytics for every registered driver.
+              &nbsp;Detailed earnings for every registered driver.
             </li>
             <li>
               <span className="font-semibold text-yellow-600">
@@ -81,9 +81,12 @@ export default function About() {
         <div className="text-center">
           <p className="text-md text-gray-600 mb-2">
             Ready to experience the next generation of ride-sharing?&nbsp;
-            <span className="inline-block font-medium text-yellow-700">
+            <Link
+              to="/signup"
+              className="inline-block font-medium text-yellow-700 hover:text-yellow-800 hover:underline px-2 py-1 rounded transition duration-200 bg-yellow-100 border border-yellow-200 shadow-sm"
+            >
               Sign up and get started within seconds!
-            </span>
+            </Link>
           </p>
         </div>
       </div>
