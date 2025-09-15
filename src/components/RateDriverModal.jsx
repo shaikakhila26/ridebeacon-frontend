@@ -54,18 +54,18 @@ export default function RateDriverModal({ ride, riderId, onClose, onRated }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-start justify-center p-4 z-50 overflow-y-auto">
-      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full relative flex flex-col my-auto mt-12">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full relative flex flex-col max-h-[90vh]">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-3xl font-light"
           aria-label="Close modal"
         >&times;</button>
         
-        <h3 className="font-semibold text-2xl mb-2 text-gray-800">Rate Your Ride</h3>
-        <p className="text-gray-600 mb-4">How was your experience with {ride?.driver?.full_name || 'your driver'}?</p>
+        <h3 className="font-semibold text-2xl mb-2 text-gray-800 text-center">Rate Your Ride</h3>
+        <p className="text-gray-600 mb-4 text-center">How was your experience with {ride?.driver?.full_name || 'your driver'}?</p>
 
-        <div className="flex-1 overflow-y-auto pr-2 pb-4 flex flex-col items-center">
+        <div className="flex-1 overflow-y-auto flex flex-col items-center">
           <div className="mb-6 flex space-x-2">
             {[1,2,3,4,5].map(star => (
               <button
