@@ -40,7 +40,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white flex flex-col space-y-1 px-4 pb-3">
           <Link to="/" className="py-2 text-gray-700 hover:text-yellow-600 font-semibold" onClick={() => setMenuOpen(false)}>Home</Link>
-          <Link to="#about" className="py-2 text-gray-700 hover:text-yellow-600 font-semibold" onClick={() => setMenuOpen(false)}>About</Link>
+          <Link to="/about" className="py-2 text-gray-700 hover:text-yellow-600 font-semibold" onClick={() => setMenuOpen(false)}>About</Link>
           <Link to="/login" className="py-2 text-gray-700 hover:text-yellow-600 font-semibold" onClick={() => setMenuOpen(false)}>Login</Link>
         </div>
       )}

@@ -11,6 +11,7 @@ import StripeFailed from "./pages/StripeFailed";
 import DriverTripHistoryPage from './pages/DriverTripHistoryPage';
 import DriverTripDetailPage from './pages/DriverTripDetailPage';
 import React from 'react';
+import About from "./pages/About";
 
 
 export default function App() {
@@ -18,6 +19,7 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
            <Route path="/signup" element={<Signup />} />
            <Route path="/rider-dashboard" element={<UserDashboard />} />
