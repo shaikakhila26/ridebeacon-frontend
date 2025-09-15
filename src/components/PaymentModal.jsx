@@ -44,24 +44,26 @@ function CheckoutForm({ clientSecret, onSuccess, onCancel }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full">
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <PaymentElement />
       {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
-      <button
-        type="submit"
-        disabled={!stripe || processing}
-        className="mt-6 w-full bg-yellow-500 text-white font-bold p-3 rounded-md hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {processing ? "Processing..." : "Pay now"}
-      </button>
-      <button
-        type="button"
-        onClick={onCancel}
-        disabled={processing}
-        className="mt-2 w-full text-gray-600 font-bold p-3 rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50"
-      >
-        Cancel
-      </button>
+      <div className="flex flex-col mt-auto">
+        <button
+          type="submit"
+          disabled={!stripe || processing}
+          className="mt-6 w-full bg-yellow-500 text-white font-bold p-3 rounded-md hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {processing ? "Processing..." : "Pay now"}
+        </button>
+        <button
+          type="button"
+          onClick={onCancel}
+          disabled={processing}
+          className="mt-2 w-full text-gray-600 font-bold p-3 rounded-md hover:bg-gray-200 transition-colors disabled:opacity-50"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }
@@ -103,7 +105,7 @@ export default function PaymentModal({ amount, rideId, riderId, onClose, onPayme
   }, [amount, rideId, riderId, onClose, API_BASE_URL]);
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50 ">
+    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
       <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full relative flex flex-col max-h-[90vh]">
         <button
           onClick={onClose}
