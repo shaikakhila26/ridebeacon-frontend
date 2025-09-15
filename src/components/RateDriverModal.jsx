@@ -54,8 +54,8 @@ export default function RateDriverModal({ ride, riderId, onClose, onRated }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full flex flex-col items-center text-center">
+    <div className="fixed inset-0 bg-black/70 flex items-start justify-center p-4 z-50 overflow-y-auto">
+      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full relative flex flex-col my-auto mt-12">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-3xl font-light"
@@ -65,26 +65,29 @@ export default function RateDriverModal({ ride, riderId, onClose, onRated }) {
         <h3 className="font-semibold text-2xl mb-2 text-gray-800">Rate Your Ride</h3>
         <p className="text-gray-600 mb-4">How was your experience with {ride?.driver?.full_name || 'your driver'}?</p>
 
-        <div className="mb-6 flex space-x-2">
-          {[1,2,3,4,5].map(star => (
-            <button
-              key={star}
-              type="button"
-              className={`text-4xl transition-colors ${star <= rating ? "text-yellow-400" : "text-gray-300"} hover:scale-110 transform`}
-              onClick={() => setRating(star)}
-              disabled={loading}
-            >★</button>
-          ))}
+        <div className="flex-1 overflow-y-auto pr-2 pb-4 flex flex-col items-center">
+          <div className="mb-6 flex space-x-2">
+            {[1,2,3,4,5].map(star => (
+              <button
+                key={star}
+                type="button"
+                className={`text-4xl transition-colors ${star <= rating ? "text-yellow-400" : "text-gray-300"} hover:scale-110 transform`}
+                onClick={() => setRating(star)}
+                disabled={loading}
+              >★</button>
+            ))}
+          </div>
+          <textarea
+            value={review}
+            onChange={e => setReview(e.target.value)}
+            rows={3}
+            className="w-full p-3 border border-gray-300 rounded-lg mb-4 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            placeholder="Share your experience (optional)"
+            disabled={loading}
+          />
         </div>
-        <textarea
-          value={review}
-          onChange={e => setReview(e.target.value)}
-          rows={3}
-          className="w-full p-3 border border-gray-300 rounded-lg mb-4 resize-none focus:outline-none focus:ring-2 focus:ring-yellow-500"
-          placeholder="Share your experience (optional)"
-          disabled={loading}
-        />
-        <div className="w-full flex flex-col sm:flex-row gap-3">
+        
+        <div className="w-full flex flex-col sm:flex-row gap-3 mt-4">
           <button
             className="w-full bg-yellow-500 text-white rounded-lg px-4 py-3 font-bold hover:bg-yellow-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={loading || rating === 0}

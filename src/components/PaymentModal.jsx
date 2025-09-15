@@ -85,7 +85,7 @@ export default function PaymentModal({ amount, rideId, riderId, onClose, onPayme
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
           },
-          body: JSON.stringify({ amount, ride_id :rideId,rider_id: riderId }),
+          body: JSON.stringify({ amount, ride_id: rideId, rider_id: riderId }),
         });
         
         const data = await response.json();
@@ -103,8 +103,8 @@ export default function PaymentModal({ amount, rideId, riderId, onClose, onPayme
   }, [amount, rideId, riderId, onClose, API_BASE_URL]);
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full relative flex flex-col min-h-[400px]">
+    <div className="fixed inset-0 bg-black/70 flex items-start justify-center p-4 z-50 overflow-y-auto">
+      <div className="bg-white rounded-2xl p-6 shadow-2xl max-w-md w-full relative flex flex-col my-auto mt-12">
         <button
           onClick={onClose}
           className="absolute top-3 right-3 text-gray-500 hover:text-gray-800 text-3xl font-light"
