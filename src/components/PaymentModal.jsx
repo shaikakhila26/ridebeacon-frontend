@@ -85,7 +85,7 @@ export default function PaymentModal({ amount, rideId, riderId, onClose, onPayme
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
           },
-          body: JSON.stringify({ amount, rideId, riderId }),
+          body: JSON.stringify({ amount, ride_id :rideId,rider_id: riderId }),
         });
         
         const data = await response.json();
